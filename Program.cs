@@ -52,21 +52,25 @@ Parser.Default.ParseArguments<Options>(args)
 
                                var text = String.Join(" ", words.Select(x => x.Text));
                                var maskArray = mask.GetMask(text);
-
-                               var wordPositions = new int[words.Count()];
-                               wordPositions[0] = 0;
-                               foreach (var (i, word) in words.SkipLast(1).Select((v, i) => (i, v)))
+                               var wordCounts = words.Count();
+                               if (wordCounts > 0)
                                {
-                                   wordPositions[i + 1] = wordPositions[i] + word.Text.Length + 1;
-                               }
+                                   var wordPositions = new int[words.Count()];
 
-                               foreach (var (word, pos) in Enumerable.Zip(words, wordPositions))
-                               {
-                                   foreach (var (notmasked, letter) in Enumerable.Zip(maskArray.Skip(pos), word.Letters))
+                                   wordPositions[0] = 0;
+                                   foreach (var (i, word) in words.SkipLast(1).Select((v, i) => (i, v)))
                                    {
-                                       if (!notmasked)
+                                       wordPositions[i + 1] = wordPositions[i] + word.Text.Length + 1;
+                                   }
+
+                                   foreach (var (word, pos) in Enumerable.Zip(words, wordPositions))
+                                   {
+                                       foreach (var (notmasked, letter) in Enumerable.Zip(maskArray.Skip(pos), word.Letters))
                                        {
-                                           renderer.DrawRectangle(pen, brush, letter.GlyphRectangle.Left, sharp.Height - letter.GlyphRectangle.Top, letter.GlyphRectangle.Width, letter.GlyphRectangle.Height);
+                                           if (!notmasked)
+                                           {
+                                               renderer.DrawRectangle(pen, brush, letter.GlyphRectangle.Left, sharp.Height - letter.GlyphRectangle.Top, letter.GlyphRectangle.Width, letter.GlyphRectangle.Height);
+                                           }
                                        }
                                    }
                                }
