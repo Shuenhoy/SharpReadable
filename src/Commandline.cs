@@ -16,7 +16,7 @@ namespace SharpReadable
         [Option('f', "fill", HelpText = "fill", Default = true)]
         public bool Fill { get; set; }
 
-        [Option('c', "context", HelpText = "context size", Default = 49)]
+        [Option('c', "context", HelpText = "context size", Default = 40)]
         public int ContextSize { get; set; }
 
         [Option('m', "mask", HelpText = "mask", Default = "heuristic")]

@@ -8,7 +8,7 @@ namespace SharpReadable
         bool refine;
         bool fill;
         int contextSize;
-        public HttpMask(string api, bool _refine = true, bool _fill = true, int _contextSize = 49)
+        public HttpMask(string api, bool _refine = true, bool _fill = true, int _contextSize = 40)
         {
             refine = _refine;
             fill = _fill;
