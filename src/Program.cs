@@ -74,6 +74,11 @@ Parser.Default.ParseArguments<Options>(args)
                                        }
                                    }
                                }
+                               if (o.SaveEvery > 0 && pig.Number % o.SaveEvery == 0)
+                               {
+                                   pdf.Save(o.Output);
+                                   Console.WriteLine($"Checkpoint. Saved to disk at page {pig.Number}");
+                               }
                                pbar.Tick($"Page {pig.Number} done");
 
                            }

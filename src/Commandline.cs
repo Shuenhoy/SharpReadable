@@ -19,6 +19,9 @@ namespace SharpReadable
         [Option('c', "context", HelpText = "context size", Default = 40)]
         public int ContextSize { get; set; }
 
+        [Option('e', "save-every", HelpText = "Write to disk every N pages", Default = 0)]
+        public int SaveEvery { get; set; }
+
         [Option('m', "mask", HelpText = "mask", Default = "heuristic")]
         public string Mask { get; set; }
 
